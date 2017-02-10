@@ -14,6 +14,12 @@
     //I also installed nodemon to watch changes in server files for change. No need to reload server anymore
     //command is npm run dev
 
+//1.2 setup DB
+//create db "auth"
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:auth/auth');
+
+
 //2. App setup
 
 //both morgan and bodyParser below are middlewares. Every request into server will pass through middlewares

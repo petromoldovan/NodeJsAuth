@@ -15,6 +15,7 @@ userSchema.pre('save', function(next) {
     //get access to user model
     const user = this;
 
+    //Salt - encryption key.
     //generate a salt then run callback(because it takes some time to generate salt)
     bcrypt.genSalt(10, function(err, salt){
         if(err) {return next(err);}
@@ -31,6 +32,20 @@ userSchema.pre('save', function(next) {
         })
     })
 });
+
+//this is function to compare passwords of user that attempt to log in.
+//We need to:
+// 1) hash the incoming password;
+// 2)get password value from db and remove Salt from it -> we will get just hashed password;
+// 3) compare the two hashed passwords. Never compare plain text passwords!
+//bcrypt does it all for us below
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
+        if(err) {return callback(err)};
+
+        callback(null, isMatch);
+    })
+};
 
 
 //create the model class. We use to create new users

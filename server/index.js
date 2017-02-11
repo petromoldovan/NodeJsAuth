@@ -4,7 +4,7 @@
     const morgan = require('morgan');
     //http library is native node library that works on low level with http request
     const http = require('http');
-
+    const cors = require('cors');
     //declare app to be instance of express
     const app = express();
 
@@ -25,6 +25,12 @@ mongoose.connect('mongodb://localhost:auth/auth');
 //both morgan and bodyParser below are middlewares. Every request into server will pass through middlewares
     //morgan is logging incoming request. I use it for debugging
     app.use(morgan('combined'));
+
+    //to allow cross origin requests(different domains, subdomains, ports) use the cors middleware on server side.
+    // cors is the security protocol to protect user in browser. Used to prevent unwanted ajax requests from one domain to another.
+    // By default server checks if domain is the same as its own. If not it gives cors error(Not allowed cross origin...)
+    //By using this middleware we force server to respond to any requests from any domains.
+    app.use(cors());
 
     //every request that is INCOMING will be parsed as json
     app.use(bodyParser.json({type: '*/*'}));

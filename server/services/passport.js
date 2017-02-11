@@ -44,7 +44,7 @@ const jwtOptions = {
 };
 
 //create JWT strategy  <--- for new users that register
-                                        //payload here is hwt token
+                                        //payload here is decoded token
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
    //See if user id in payload exists in our db.
     //if it does, call 'done' with that user obj

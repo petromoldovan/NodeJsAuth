@@ -35,6 +35,9 @@ mongoose.connect('mongodb://localhost:auth/auth');
     //every request that is INCOMING will be parsed as json
     app.use(bodyParser.json({type: '*/*'}));
 
+
+    app.use('/static', express.static('public'));
+
     //initialize router for app
     router(app);
 

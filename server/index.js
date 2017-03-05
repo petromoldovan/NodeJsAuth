@@ -43,7 +43,7 @@ mongoose.connect('mongodb://localhost:auth/auth');
 
 
 //3. Server sut up
-    const port = process.env.PORT || 3090;
+    const port = process.env.PORT || 9000;
 
     //here we say to forward all http requests to express server
     const server = http.createServer(app);
